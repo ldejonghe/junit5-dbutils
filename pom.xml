@@ -1,0 +1,75 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.ldejonghe.utils.junit5</groupId>
+	<artifactId>junit5-dbutils</artifactId>
+	<version>1.0.0-jakarta</version>
+	<packaging>jar</packaging>
+
+	<url>https://github.com/ldejonghe/junit5-dbutils</url>
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>https://opensource.org/licenses/MIT</url>
+		</license>
+	</licenses>
+	<scm>
+		<url>https://github.com/ldejonghe/junit5-dbutils</url>
+		<connection>scm:git:git://github.com/ldejonghe/junit5-dbutils.git</connection>
+		<developerConnection>scm:git:ssh://github.com/ldejonghe/junit5-dbutils.git</developerConnection>
+	</scm>
+	<developers>
+		<developer>
+			<id>Laurent</id>
+			<name>Dejonghe</name>
+			<email>laurent.dejonghe@gmail.com</email>
+			<url>https://www.linkedin.com/in/ldejonghe/</url>
+        <roles>
+            <role>architect</role>
+        </roles>
+		</developer>
+	</developers>
+
+
+	<!-- Centralized dependency versions -->
+	<properties>
+		<junit.jupiter.version>5.10.2</junit.jupiter.version>
+		<jaxb.runtime.version>4.0.3</jaxb.runtime.version>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+	</properties>
+
+	<dependencies>
+		<!-- JUnit Jupiter API -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>${junit.jupiter.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- JAXB Runtime for XML parsing -->
+		<dependency>
+			<groupId>org.glassfish.jaxb</groupId>
+			<artifactId>jaxb-runtime</artifactId>
+			<version>${jaxb.runtime.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<!-- Compiler Plugin for Java 17 (or adapt as needed) -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.11.0</version>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
