@@ -8,27 +8,36 @@
 	<version>1.0.0-jakarta</version>
 	<packaging>jar</packaging>
 
+	<name>${project.groupId}:${project.artifactId}</name>
+	<description>A Jakarta compatible library with dataset utilitiies, and
+		support for XML based datasets as used in obsolete non-Jakarta compliant
+		DBunit library.</description>
 	<url>https://github.com/ldejonghe/junit5-dbutils</url>
+
 	<licenses>
 		<license>
 			<name>MIT License</name>
-			<url>https://opensource.org/licenses/MIT</url>
+			<url>http://www.opensource.org/licenses/mit-license.php</url>
 		</license>
 	</licenses>
+	
 	<scm>
-		<url>https://github.com/ldejonghe/junit5-dbutils</url>
 		<connection>scm:git:git://github.com/ldejonghe/junit5-dbutils.git</connection>
 		<developerConnection>scm:git:ssh://github.com/ldejonghe/junit5-dbutils.git</developerConnection>
+		<url>https://github.com/ldejonghe/junit5-dbutils/tree/main</url>
 	</scm>
+	
 	<developers>
 		<developer>
 			<id>Laurent</id>
 			<name>Dejonghe</name>
 			<email>laurent.dejonghe@gmail.com</email>
+			<organization>ldejonghe</organization>
+     		<organizationUrl>http://ldejonghe.org/</organizationUrl>
 			<url>https://www.linkedin.com/in/ldejonghe/</url>
-        <roles>
-            <role>architect</role>
-        </roles>
+			<roles>
+				<role>architect</role>
+			</roles>
 		</developer>
 	</developers>
 
