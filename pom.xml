@@ -20,20 +20,14 @@
 			<url>http://www.opensource.org/licenses/mit-license.php</url>
 		</license>
 	</licenses>
-	
-	<scm>
-		<connection>scm:git:git://github.com/ldejonghe/junit5-dbutils.git</connection>
-		<developerConnection>scm:git:ssh://github.com/ldejonghe/junit5-dbutils.git</developerConnection>
-		<url>https://github.com/ldejonghe/junit5-dbutils/tree/main</url>
-	</scm>
-	
+
 	<developers>
 		<developer>
-			<id>Laurent</id>
-			<name>Dejonghe</name>
+			<id>ldejonghe</id>
+			<name>Laurent Dejonghe</name>
 			<email>laurent.dejonghe@gmail.com</email>
 			<organization>ldejonghe</organization>
-     		<organizationUrl>http://ldejonghe.org/</organizationUrl>
+			<organizationUrl>http://ldejonghe.org/</organizationUrl>
 			<url>https://www.linkedin.com/in/ldejonghe/</url>
 			<roles>
 				<role>architect</role>
@@ -41,31 +35,82 @@
 		</developer>
 	</developers>
 
+	<scm>
+		<connection>scm:git:git://github.com/ldejonghe/junit5-dbutils.git</connection>
+		<developerConnection>
+			scm:git:ssh://github.com/ldejonghe/junit5-dbutils.git</developerConnection>
+		<url>https://github.com/ldejonghe/junit5-dbutils/tree/main</url>
+	</scm>
+
 
 	<!-- Centralized dependency versions -->
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<junit.jupiter.version>5.10.2</junit.jupiter.version>
+		<spring.boot.version>3.2.4</spring.boot.version>
 		<jaxb.runtime.version>4.0.3</jaxb.runtime.version>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 	</properties>
+
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring.boot.version}</version> <!-- Replace with the
+				Spring Boot version you target -->
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<dependencies>
 		<!-- JUnit Jupiter API -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
-			<version>${junit.jupiter.version}</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
 		</dependency>
 
 		<!-- JAXB Runtime for XML parsing -->
 		<dependency>
 			<groupId>org.glassfish.jaxb</groupId>
 			<artifactId>jaxb-runtime</artifactId>
-			<version>${jaxb.runtime.version}</version>
+		</dependency>
+
+		<!-- Test Scope: Only available for testing -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
 
 	<build>
 		<plugins>
@@ -79,6 +124,94 @@
 					<target>${maven.compiler.target}</target>
 				</configuration>
 			</plugin>
+
+			<plugin>
+				<groupId>org.sonatype.central</groupId>
+				<artifactId>central-publishing-maven-plugin</artifactId>
+				<version>0.7.0</version>
+				<extensions>true</extensions>
+				<configuration>
+					<publishingServerId>central</publishingServerId>
+					<autoPublish>true</autoPublish>
+					<waitUntil>published</waitUntil>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.3.0</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>3.5.0</version>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>release</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>3.1.0</version>
+						<configuration>
+							<keyname>D9D315251EA0626ABC9495B74364855F6627E42C</keyname>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<id>gpg-sign</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-gpg-plugin</artifactId>
+						<version>3.1.0</version>
+						<configuration>
+							<keyname>D9D315251EA0626ABC9495B74364855F6627E42C</keyname>
+						</configuration>
+						<executions>
+							<execution>
+								<id>sign-artifacts</id>
+								<phase>verify</phase>
+								<goals>
+									<goal>sign</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
 </project>
