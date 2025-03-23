@@ -5,7 +5,7 @@
 
 	<groupId>org.ldejonghe.utils.junit5</groupId>
 	<artifactId>junit5-dbutils</artifactId>
-	<version>1.0.0-jakarta</version>
+	<version>1.0.1-jakarta</version>
 	<packaging>jar</packaging>
 
 	<name>${project.groupId}:${project.artifactId}</name>
