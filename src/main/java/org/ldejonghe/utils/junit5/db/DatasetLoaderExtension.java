@@ -1,11 +1,9 @@
 package org.ldejonghe.utils.junit5.db;
 
-import org.junit.jupiter.api.extension.*;
 import java.lang.reflect.Method;
-import javax.sql.DataSource;
 import java.sql.Connection;
 
-
+import javax.sql.DataSource;
 
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;

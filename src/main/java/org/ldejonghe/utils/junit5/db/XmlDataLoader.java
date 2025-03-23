@@ -1,13 +1,19 @@
 package org.ldejonghe.utils.junit5.db;
 
-import org.springframework.stereotype.Component;
-import org.w3c.dom.*;
-
-import javax.xml.parsers.DocumentBuilderFactory;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.springframework.stereotype.Component;
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 @Component
 public class XmlDataLoader {

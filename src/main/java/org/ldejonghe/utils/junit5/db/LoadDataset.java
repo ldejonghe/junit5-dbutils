@@ -1,6 +1,9 @@
 package org.ldejonghe.utils.junit5.db;
 
-import java.lang.annotation.*;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * Annotation used to specify a dataset XML file that should be loaded 
@@ -31,4 +34,5 @@ public @interface LoadDataset {
      * @return the dataset file path relative to the classpath or file system
      */
     String value();
+    boolean clean() default true;  // Perform Flyway clean/migrate by default
 }
